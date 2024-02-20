@@ -1,0 +1,192 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{kotex}
+
+\geometry{a4paper,left=20mm,right=20mm,top=20mm,bottom=20mm}
+
+\title{CSED342\ ASSN4}
+\author{20220848 선민수}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1: MDP Warm-Up}
+Consider an MDP problem. There are four states {SA,SB,SC,SD}, at each of which two actions {+,−} are available, and the state transition and reward have no randomness. All the (action, reward) pairs are described in Figure 1. Assume all the episodes have length 3 (e.g. $S_A\xrightarrow{+}S_B\xrightarrow{-}S_A\xrightarrow[]{-}S_A$).
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=400pt]{fig.png}
+\end{figure}
+
+\subsection*{Problem 1a}
+Find the optimal policy at the initial state $S_A$ with discount factor $\gamma$ = 0.001. Justify your answer.
+
+\begin{center}
+    \line(1,0){500}
+\end{center}
+
+Using value iteration,
+
+\subsubsection*{i.$\mbox{ }t=0$}
+\begin{center}
+    $V_{opt}^{(0)}(S_A)=0$,
+    $V_{opt}^{(0)}(S_B)=0$,
+    $V_{opt}^{(0)}(S_C)=0$,
+    $V_{opt}^{(0)}(S_D)=0$
+\end{center}
+
+\subsubsection*{ii.$\mbox{ }t=1$}
+\begin{center}
+    $V_{opt}^{(1)}(S_A)=5$,
+    $V_{opt}^{(1)}(S_B)=0$,
+    $V_{opt}^{(1)}(S_C)=16$,
+    $V_{opt}^{(1)}(S_D)=0$ 
+\end{center}   
+
+\subsubsection*{iii.$\mbox{ }t=2$}
+\begin{center}
+    $V_{opt}^{(2)}(S_A)=5\gamma+5$,
+    $V_{opt}^{(2)}(S_B)=16\gamma$,
+    $V_{opt}^{(2)}(S_C)=16$,
+    $V_{opt}^{(2)}(S_D)=0$
+\end{center}    
+
+\subsubsection*{iv.$\mbox{ }t=3$}
+\begin{center}
+    $V_{opt}^{(3)}(S_A)=5\gamma^2+5\gamma+5$,
+    $V_{opt}^{(3)}(S_B)=16\gamma$,
+    $V_{opt}^{(3)}(S_C)=16$,
+    $V_{opt}^{(3)}(S_D)=0$
+\end{center}    
+    
+\subsubsection*{v.$\mbox{ }t=4$}
+\begin{center}
+    $V_{opt}^{(4)}(S_A)=5\gamma^3+5\gamma^2+5\gamma+5$,
+    $V_{opt}^{(4)}(S_B)=16\gamma$,
+    $V_{opt}^{(4)}(S_C)=16$,
+    $V_{opt}^{(4)}(S_D)=0$    
+\end{center}
+
+\ As $t$ goes larger, $V_{opt}^{(t)}$ is as same as the sum of the geometric sequences. It does not change at all during iteration with all t, which means the policy does not change. Therefore, the optimal policy with discount factor $\gamma = 0.001$ is as same as below.\\
+
+\begin{center}
+    $\pi_{opt}(S_A)=\mbox{Action -}$,
+    $\pi_{opt}(S_B)=\mbox{Action +}$,
+    $\pi_{opt}(S_C)=\mbox{Action +}$,
+    $\pi_{opt}(S_D)=\mbox{Action + or Action -}$
+\end{center}
+
+Therefore, the optimal policy at the initial state $S_A$ with discount factor $\gamma =0.001$ is Action -.\\
+
+\begin{center}
+    $\therefore\pi_{opt}(S_A)=\mbox{Action -}$
+\end{center}
+
+\subsection*{Problem 1b}
+Find the optimal policy at the initial state $S_A$ with discount factor $\gamma$ = 0.999. Justify your answer.
+
+\begin{center}
+    \line(1,0){500}
+\end{center}
+
+Using value iteration,
+
+\subsubsection*{i.$\mbox{ }t=0$}
+\begin{center}
+    $V_{opt}^{(0)}(S_A)=0$,
+    $V_{opt}^{(0)}(S_B)=0$,
+    $V_{opt}^{(0)}(S_C)=0$,
+    $V_{opt}^{(0)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{ii.$\mbox{ }t=1$}
+\begin{center}
+    $V_{opt}^{(1)}(S_A)=5$,
+    $V_{opt}^{(1)}(S_B)=0$,
+    $V_{opt}^{(1)}(S_C)=16$,
+    $V_{opt}^{(1)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{iii.$\mbox{ }t=2$}
+\begin{center}
+    $V_{opt}^{(2)}(S_A)=5\gamma+5$,
+    $V_{opt}^{(2)}(S_B)=16\gamma$,
+    $V_{opt}^{(2)}(S_C)=16$,
+    $V_{opt}^{(2)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{iv.$\mbox{ }t=3$}
+\begin{center}
+    $V_{opt}^{(3)}(S_A)=16\gamma^2$,
+    $V_{opt}^{(3)}(S_B)=16\gamma$,
+    $V_{opt}^{(3)}(S_C)=16$,
+    $V_{opt}^{(3)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{v.$\mbox{ }t=4$}
+\begin{center}
+    $V_{opt}^{(4)}(S_A)=16\gamma^3+5$,
+    $V_{opt}^{(4)}(S_B)=16\gamma$,
+    $V_{opt}^{(4)}(S_C)=16$,
+    $V_{opt}^{(4)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{vi.$\mbox{ }t=5$}
+\begin{center}
+    $V_{opt}^{(5)}(S_A)=16\gamma^4+5\gamma+5$,
+    $V_{opt}^{(5)}(S_B)=16\gamma^4+5\gamma$,
+    $V_{opt}^{(5)}(S_C)=16$,
+    $V_{opt}^{(5)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{vii.$\mbox{ }t=6$}
+\begin{center}
+    $V_{opt}^{(6)}(S_A)=16\gamma^5+5\gamma^2+5\gamma+5$,
+    $V_{opt}^{(6)}(S_B)=16\gamma^5+5\gamma^2+5\gamma$,
+    $V_{opt}^{(6)}(S_C)=16\gamma^5+5\gamma^2$,
+    $V_{opt}^{(6)}(S_D)=0$    
+\end{center}
+
+\subsubsection*{viii.$\mbox{ }t=7$}
+\begin{center}
+    $V_{opt}^{(7)}(S_A)=16\gamma^6+5\gamma^3+5\gamma^2+5\gamma+5$,
+    $V_{opt}^{(7)}(S_B)=16\gamma^6+5\gamma^3+5\gamma^2+5\gamma$,\\
+    $V_{opt}^{(7)}(S_C)=16\gamma^6+5\gamma^3+5\gamma^2$,
+    $V_{opt}^{(7)}(S_D)=0$    
+\end{center}
+
+\ As $t$ goes larger than $t=7$, the policy does not change at all. The fixed policy when the $t$ is larger than $t=7$ is described below.\\
+
+\begin{center}
+    $\pi_{opt}(S_A)=\mbox{Action -}$,
+    $\pi_{opt}(S_B)=\mbox{Action -}$,
+    $\pi_{opt}(S_C)=\mbox{Action -}$,
+    $\pi_{opt}(S_D)=\mbox{Action + or Action -}$
+\end{center}
+
+Therefore, the optimal policy at the initial state $S_A$ with discount factor $\gamma =0.999$ is Action -.\\
+
+\begin{center}
+    $\therefore\pi_{opt}(S_A)=\mbox{Action -}$
+\end{center}
+
+\subsection*{Problem 1c}
+What is the optimal policy at the initial state $S_B$? Explain your answer in terms of discount factor $\gamma$ ∈(0,1).
+
+\begin{center}
+    \line(1,0){500}
+\end{center}
+
+\ According to the \textbf{Problem 1a} and \textbf{Problem 1b} above, optimal policy at the initial state $S_B$ with discount factor $\gamma =0.001$ and $\gamma =0.999$ is described below respectively.
+
+\begin{center}
+    $\pi_{opt,\gamma=0.001}(S_B)=\mbox{Action +},\quad\pi_{opt,\gamma=0.999}(S_B)=\mbox{Action -}$
+\end{center}
+
+\ Since discount factor affects the selection of action in aspect of how much to consider the future reward, the higher discount factor will result in higher tendency of taking $\mbox{Action -}$ and lower discount factor will result in higher tendency of taking $\mbox{Action +}$ as optimal policy at the initial state $S_B$.
+
+\end{document}
