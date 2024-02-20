@@ -186,5 +186,6 @@ cython_debug/
 #.idea/
 
 *.out
+*.res
 *.pdf
 *.zip
